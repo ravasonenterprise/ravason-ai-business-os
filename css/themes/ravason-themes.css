@@ -1,0 +1,55 @@
+:root {
+
+    /* Ravason Brand Colors */
+
+    --ravason-midnight-blue: #0B1F3A;
+    --ravason-gold: #D4AF37;
+
+    /* Background Colors */
+
+    --background-primary: #FFFFFF;
+    --background-secondary: #F5F7FA;
+
+    /* Text Colors */
+
+    --text-primary: #0B1F3A;
+    --text-secondary: #555555;
+
+    /* Status Colors */
+
+    --success-color: #2E7D32;
+    --warning-color: #ED6C02;
+    --danger-color: #C62828;
+
+
+    /* Typography */
+
+    --font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+
+    /* Spacing System */
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+
+
+    /* Border Radius */
+
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+
+
+    /* Shadows */
+
+    --shadow-card:
+        0 4px 12px rgba(0,0,0,0.08);
+
+}
