@@ -129,6 +129,29 @@ const RavasonAIBusinessBuilder = {
                 </div>
 
 
+                <div
+                    id="business-profile-summary"
+                    class="business-profile-summary">
+
+                    <h2>
+                        Business Profile
+                    </h2>
+
+                    <p>
+                        No business profile has been created yet.
+                    </p>
+
+                    <button
+                        class="secondary-action"
+                        data-builder-action="business-profile">
+
+                        Create Business Profile
+
+                    </button>
+
+                </div>
+
+
                 <div class="ai-builder-status">
 
                     <div class="status-icon">
@@ -193,3 +216,118 @@ document.addEventListener("click", (event) => {
     }
 
 });
+
+
+RavasonAIBusinessBuilder.loadProfile = function () {
+
+    const profileData =
+        localStorage.getItem(
+            "ravason_business_profile"
+        );
+
+    const summary =
+        document.getElementById(
+            "business-profile-summary"
+        );
+
+    if (!summary) {
+        return;
+    }
+
+    if (!profileData) {
+        return;
+    }
+
+    const profile =
+        JSON.parse(profileData);
+
+    summary.innerHTML = `
+
+        <div class="profile-summary-header">
+
+            <div>
+
+                <span class="module-eyebrow">
+                    BUSINESS PROFILE
+                </span>
+
+                <h2>
+                    ${profile.businessName || "Unnamed Business"}
+                </h2>
+
+            </div>
+
+            <span class="profile-complete-badge">
+                Profile Created
+            </span>
+
+        </div>
+
+
+        <div class="profile-summary-grid">
+
+            <div>
+
+                <span>
+                    Industry
+                </span>
+
+                <strong>
+                    ${profile.industry || "Not specified"}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Location
+                </span>
+
+                <strong>
+                    ${profile.location || "Not specified"}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Business Size
+                </span>
+
+                <strong>
+                    ${profile.businessSize || "Not specified"}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-description">
+
+            <span>
+                Description
+            </span>
+
+            <p>
+                ${profile.description || "No description provided."}
+            </p>
+
+        </div>
+
+
+        <button
+            class="secondary-action"
+            data-builder-action="business-profile">
+
+            Edit Business Profile
+
+        </button>
+
+    `;
+
+};

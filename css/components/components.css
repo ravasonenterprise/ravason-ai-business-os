@@ -705,3 +705,113 @@
     font-weight: 600;
 
 }
+
+
+/* ========================================
+   BUSINESS PROFILE SUMMARY
+======================================== */
+
+.business-profile-summary {
+
+    margin-top: 24px;
+
+    padding: 24px;
+
+    background: var(--ravason-white);
+
+    border: 1px solid var(--ravason-border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+.profile-summary-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+
+}
+
+.profile-summary-header h2 {
+
+    margin-top: 8px;
+
+    color: var(--ravason-midnight-blue);
+
+}
+
+.profile-complete-badge {
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: rgba(212, 175, 55, 0.18);
+
+    color: var(--ravason-midnight-blue);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+.profile-summary-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+.profile-summary-grid div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+.profile-summary-grid span,
+.profile-description > span {
+
+    color: var(--ravason-muted-text);
+
+    font-size: 13px;
+
+}
+
+.profile-summary-grid strong {
+
+    color: var(--ravason-midnight-blue);
+
+}
+
+.profile-description {
+
+    margin-bottom: 20px;
+
+}
+
+.profile-description p {
+
+    color: var(--ravason-muted-text);
+
+    line-height: 1.6;
+
+}

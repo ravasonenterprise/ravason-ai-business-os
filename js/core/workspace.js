@@ -79,6 +79,8 @@ const RavasonWorkspace = {
             this.workspace.innerHTML =
                 window.RavasonAIBusinessBuilder.render();
 
+            window.RavasonAIBusinessBuilder.loadProfile();
+
             return;
 
         }
