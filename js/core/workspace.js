@@ -71,6 +71,18 @@ const RavasonWorkspace = {
 
     render(route) {
 
+        if (
+            route === "business-builder" &&
+            window.RavasonAIBusinessBuilder
+        ) {
+
+            this.workspace.innerHTML =
+                window.RavasonAIBusinessBuilder.render();
+
+            return;
+
+        }
+
         const view =
             this.views[route];
 

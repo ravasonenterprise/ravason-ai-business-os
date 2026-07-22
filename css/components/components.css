@@ -388,3 +388,197 @@
     font-weight: 600;
 
 }
+
+
+/* ========================================
+   AI BUSINESS BUILDER
+======================================== */
+
+.module-workspace {
+
+    width: 100%;
+
+}
+
+.module-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 24px;
+
+    margin-bottom: 32px;
+
+}
+
+.module-eyebrow {
+
+    color: var(--ravason-gold);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+.module-header h1 {
+
+    margin: 8px 0;
+
+    color: var(--ravason-midnight-blue);
+
+}
+
+.module-header p {
+
+    color: var(--ravason-muted-text);
+
+}
+
+.primary-action,
+.secondary-action {
+
+    border: none;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+}
+
+.primary-action {
+
+    padding: 13px 20px;
+
+    background: var(--ravason-midnight-blue);
+
+    color: white;
+
+}
+
+.secondary-action {
+
+    padding: 10px 16px;
+
+    background: transparent;
+
+    border: 1px solid var(--ravason-gold);
+
+    color: var(--ravason-midnight-blue);
+
+}
+
+.builder-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+.builder-card {
+
+    padding: 24px;
+
+    background: var(--ravason-white);
+
+    border: 1px solid var(--ravason-border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+.builder-card-icon {
+
+    font-size: 32px;
+
+    margin-bottom: 16px;
+
+}
+
+.builder-card h2 {
+
+    color: var(--ravason-midnight-blue);
+
+}
+
+.builder-card p {
+
+    color: var(--ravason-muted-text);
+
+    line-height: 1.6;
+
+    min-height: 52px;
+
+}
+
+.ai-builder-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-top: 24px;
+
+    padding: 20px;
+
+    background: rgba(212, 175, 55, 0.10);
+
+    border: 1px solid var(--ravason-gold);
+
+    border-radius: 12px;
+
+}
+
+.status-icon {
+
+    font-size: 30px;
+
+}
+
+.ai-builder-status h3 {
+
+    margin: 0;
+
+    color: var(--ravason-midnight-blue);
+
+}
+
+.ai-builder-status p {
+
+    margin: 5px 0 0;
+
+    color: var(--ravason-muted-text);
+
+}
+
+.status-badge {
+
+    margin-left: auto;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: var(--ravason-gold);
+
+    color: var(--ravason-midnight-blue);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
