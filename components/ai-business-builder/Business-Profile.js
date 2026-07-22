@@ -93,7 +93,7 @@ const RavasonBusinessProfile = {
                                     </option>
 
                                     ${
-                                        window.RavasonBusinessOptions
+                                        window.RavasonIndustryDatabase
                                             .industries
                                             .map(industry => `
                                                 <option
@@ -126,7 +126,7 @@ const RavasonBusinessProfile = {
                                     </option>
 
                                     ${
-                                        window.RavasonBusinessOptions
+                                        window.RavasonIndustryDatabase
                                             .countries
                                             .map(country => `
                                                 <option
@@ -149,31 +149,20 @@ const RavasonBusinessProfile = {
                                     City
                                 </label>
 
-                                <select
+                                <input
+                                    type="text"
                                     id="business-city"
                                     name="city"
+                                    placeholder="Search or enter city"
+                                    value="${profile.city || ""}"
+                                    autocomplete="off"
                                     required>
 
-                                    <option value="">
-                                        Select city
-                                    </option>
-
-                                    ${
-                                        profile.country &&
-                                        window.RavasonCities[profile.country]
-                                            ? window.RavasonCities[profile.country]
-                                                .map(city => `
-                                                    <option
-                                                        value="${city}"
-                                                        ${profile.city === city ? "selected" : ""}>
-                                                        ${city}
-                                                    </option>
-                                                `)
-                                                .join("")
-                                            : ""
-                                    }
-
-                                </select>
+                                <div
+                                    id="city-suggestions"
+                                    class="city-suggestions"
+                                    hidden>
+                                </div>
 
                             </div>
 
@@ -310,43 +299,118 @@ const RavasonBusinessProfile = {
                     "business-country"
                 );
 
-            const citySelect =
+            const cityInput =
                 document.getElementById(
                     "business-city"
+                );
+
+            const citySuggestions =
+                document.getElementById(
+                    "city-suggestions"
                 );
 
 
             if (
                 countrySelect &&
-                citySelect
+                cityInput &&
+                citySuggestions
             ) {
+
+                cityInput.addEventListener(
+                    "input",
+                    () => {
+
+                        const country =
+                            countrySelect.value;
+
+                        const query =
+                            cityInput.value
+                                .trim()
+                                .toLowerCase();
+
+                        const cities =
+                            window.RavasonCityDatabase[
+                                country
+                            ] || [];
+
+                        const matches =
+                            cities.filter(
+                                city =>
+                                    city
+                                        .toLowerCase()
+                                        .includes(query)
+                            );
+
+                        if (
+                            !query ||
+                            !matches.length
+                        ) {
+
+                            citySuggestions.hidden =
+                                true;
+
+                            citySuggestions.innerHTML =
+                                "";
+
+                            return;
+
+                        }
+
+                        citySuggestions.innerHTML =
+                            matches
+                                .map(city => `
+                                    <button
+                                        type="button"
+                                        class="city-suggestion"
+                                        data-city="${city}">
+                                        ${city}
+                                    </button>
+                                `)
+                                .join("");
+
+                        citySuggestions.hidden =
+                            false;
+
+
+                        citySuggestions
+                            .querySelectorAll(
+                                ".city-suggestion"
+                            )
+                            .forEach(
+                                button => {
+
+                                    button.addEventListener(
+                                        "click",
+                                        () => {
+
+                                            cityInput.value =
+                                                button.dataset.city;
+
+                                            citySuggestions.hidden =
+                                                true;
+
+                                        }
+                                    );
+
+                                }
+                            );
+
+                    }
+                );
+
 
                 countrySelect.addEventListener(
                     "change",
                     () => {
 
-                        const cities =
-                            window.RavasonCities[
-                                countrySelect.value
-                            ] || [];
+                        cityInput.value =
+                            "";
 
-                        citySelect.innerHTML = `
+                        citySuggestions.hidden =
+                            true;
 
-                            <option value="">
-                                Select city
-                            </option>
-
-                            ${
-                                cities
-                                    .map(city => `
-                                        <option value="${city}">
-                                            ${city}
-                                        </option>
-                                    `)
-                                    .join("")
-                            }
-
-                        `;
+                        citySuggestions.innerHTML =
+                            "";
 
                     }
                 );
