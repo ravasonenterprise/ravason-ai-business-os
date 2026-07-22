@@ -83,6 +83,21 @@ const RavasonWorkspace = {
 
         }
 
+
+        if (
+            route === "business-profile" &&
+            window.RavasonBusinessProfile
+        ) {
+
+            this.workspace.innerHTML =
+                window.RavasonBusinessProfile.render();
+
+            window.RavasonBusinessProfile.init();
+
+            return;
+
+        }
+
         const view =
             this.views[route];
 

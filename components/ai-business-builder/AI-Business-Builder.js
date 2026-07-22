@@ -50,8 +50,12 @@ const RavasonAIBusinessBuilder = {
                             location, and business model.
                         </p>
 
-                        <button class="secondary-action">
+                        <button
+                            class="secondary-action"
+                            data-builder-action="business-profile">
+
                             Set Up Profile
+
                         </button>
 
                     </article>
@@ -160,3 +164,32 @@ const RavasonAIBusinessBuilder = {
 
 window.RavasonAIBusinessBuilder =
     RavasonAIBusinessBuilder;
+
+
+document.addEventListener("click", (event) => {
+
+    const action =
+        event.target.closest(
+            "[data-builder-action]"
+        );
+
+    if (!action) {
+        return;
+    }
+
+    const actionName =
+        action.dataset.builderAction;
+
+
+    if (
+        actionName === "business-profile" &&
+        window.RavasonRouter
+    ) {
+
+        window.RavasonRouter.navigate(
+            "business-profile"
+        );
+
+    }
+
+});
