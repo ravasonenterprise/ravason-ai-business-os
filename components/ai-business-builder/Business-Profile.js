@@ -277,19 +277,72 @@ const RavasonBusinessProfile = {
                     const formData =
                         new FormData(form);
 
+                    const businessName =
+                        formData.get("businessName").trim();
+
+                    const industry =
+                        formData.get("industry");
+
+                    const location =
+                        formData.get("location").trim();
+
+                    const businessSize =
+                        formData.get("businessSize");
+
+
+                    if (!businessName) {
+
+                        alert(
+                            "Please enter your business name."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!industry) {
+
+                        alert(
+                            "Please select your industry."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!location) {
+
+                        alert(
+                            "Please enter your business location."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!businessSize) {
+
+                        alert(
+                            "Please select your business size."
+                        );
+
+                        return;
+
+                    }
+
+
                     const businessProfile = {
 
-                        businessName:
-                            formData.get("businessName"),
+                        businessName: businessName,
 
-                        industry:
-                            formData.get("industry"),
+                        industry: industry,
 
-                        location:
-                            formData.get("location"),
+                        location: location,
 
-                        businessSize:
-                            formData.get("businessSize"),
+                        businessSize: businessSize,
 
                         description:
                             formData.get("description")
