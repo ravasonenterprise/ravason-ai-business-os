@@ -1,0 +1,34 @@
+#app {
+    min-height: 100vh;
+}
+
+.app-header {
+    height: var(--header-height);
+    background: var(--ravason-midnight-blue);
+    color: var(--ravason-white);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 var(--space-lg);
+
+    box-shadow: var(--shadow-md);
+}
+
+.main-layout {
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--ravason-midnight-blue);
+    padding: var(--space-lg) var(--space-md);
+}
+
+.dashboard {
+    flex: 1;
+    padding: var(--space-xl);
+    background: var(--ravason-light-bg);
+}

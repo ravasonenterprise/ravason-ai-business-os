@@ -1,0 +1,103 @@
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.ravason-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--ravason-gold);
+}
+
+.brand-text h2 {
+    font-size: 18px;
+    color: var(--ravason-white);
+}
+
+.brand-text small {
+    color: var(--ravason-gold);
+    font-size: 12px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.global-search {
+    width: 220px;
+    padding: 10px 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-md);
+
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--ravason-white);
+
+    outline: none;
+}
+
+.global-search::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.notification-btn {
+    border: none;
+    background: transparent;
+    color: var(--ravason-white);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.profile {
+    color: var(--ravason-gold);
+    font-weight: bold;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    color: var(--ravason-white);
+    padding: 14px 16px;
+    margin-bottom: 6px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.sidebar li:hover {
+    background: rgba(212, 175, 55, 0.18);
+    color: var(--ravason-gold);
+}
+
+.dashboard h1 {
+    color: var(--ravason-midnight-blue);
+    margin-bottom: var(--space-sm);
+}
+
+.dashboard > p {
+    color: var(--ravason-muted-text);
+}
+
+.coming-soon {
+    margin-top: var(--space-xl);
+    background: var(--ravason-white);
+    border-left: 4px solid var(--ravason-gold);
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.coming-soon h3 {
+    color: var(--ravason-midnight-blue);
+    margin-bottom: var(--space-sm);
+}
+
+.coming-soon p {
+    color: var(--ravason-muted-text);
+}

@@ -1,0 +1,26 @@
+:root {
+    --ravason-midnight-blue: #0B1F3A;
+    --ravason-gold: #D4AF37;
+
+    --ravason-white: #FFFFFF;
+    --ravason-light-bg: #F4F6F8;
+    --ravason-dark-text: #172033;
+    --ravason-muted-text: #7A8494;
+    --ravason-border: #E1E5EA;
+
+    --header-height: 72px;
+    --sidebar-width: 260px;
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
