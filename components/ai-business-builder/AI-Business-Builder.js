@@ -282,11 +282,24 @@ RavasonAIBusinessBuilder.loadProfile = function () {
             <div>
 
                 <span>
-                    Location
+                    Country
                 </span>
 
                 <strong>
-                    ${profile.location || "Not specified"}
+                    ${profile.country || "Not specified"}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    City
+                </span>
+
+                <strong>
+                    ${profile.city || "Not specified"}
                 </strong>
 
             </div>

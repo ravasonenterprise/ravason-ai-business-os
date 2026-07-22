@@ -92,33 +92,18 @@ const RavasonBusinessProfile = {
                                         Select industry
                                     </option>
 
-                                    <option value="retail" ${profile.industry === "retail" ? "selected" : ""}>
-                                        Retail
-                                    </option>
-
-                                    <option value="technology" ${profile.industry === "technology" ? "selected" : ""}>
-                                        Technology
-                                    </option>
-
-                                    <option value="finance" ${profile.industry === "finance" ? "selected" : ""}>
-                                        Finance
-                                    </option>
-
-                                    <option value="education" ${profile.industry === "education" ? "selected" : ""}>
-                                        Education
-                                    </option>
-
-                                    <option value="hospitality" ${profile.industry === "hospitality" ? "selected" : ""}>
-                                        Hospitality
-                                    </option>
-
-                                    <option value="agriculture" ${profile.industry === "agriculture" ? "selected" : ""}>
-                                        Agriculture
-                                    </option>
-
-                                    <option value="other" ${profile.industry === "other" ? "selected" : ""}>
-                                        Other
-                                    </option>
+                                    ${
+                                        window.RavasonBusinessOptions
+                                            .industries
+                                            .map(industry => `
+                                                <option
+                                                    value="${industry}"
+                                                    ${profile.industry === industry ? "selected" : ""}>
+                                                    ${industry}
+                                                </option>
+                                            `)
+                                            .join("")
+                                    }
 
                                 </select>
 
@@ -127,16 +112,68 @@ const RavasonBusinessProfile = {
 
                             <div class="form-group">
 
-                                <label for="business-location">
-                                    Location
+                                <label for="business-country">
+                                    Country
                                 </label>
 
-                                <input
-                                    type="text"
-                                    id="business-location"
-                                    name="location"
-                                    placeholder="City / Country"
-                                    value="${profile.location || ""}">
+                                <select
+                                    id="business-country"
+                                    name="country"
+                                    required>
+
+                                    <option value="">
+                                        Select country
+                                    </option>
+
+                                    ${
+                                        window.RavasonBusinessOptions
+                                            .countries
+                                            .map(country => `
+                                                <option
+                                                    value="${country}"
+                                                    ${profile.country === country ? "selected" : ""}>
+                                                    ${country}
+                                                </option>
+                                            `)
+                                            .join("")
+                                    }
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="business-city">
+                                    City
+                                </label>
+
+                                <select
+                                    id="business-city"
+                                    name="city"
+                                    required>
+
+                                    <option value="">
+                                        Select city
+                                    </option>
+
+                                    ${
+                                        profile.country &&
+                                        window.RavasonCities[profile.country]
+                                            ? window.RavasonCities[profile.country]
+                                                .map(city => `
+                                                    <option
+                                                        value="${city}"
+                                                        ${profile.city === city ? "selected" : ""}>
+                                                        ${city}
+                                                    </option>
+                                                `)
+                                                .join("")
+                                            : ""
+                                    }
+
+                                </select>
 
                             </div>
 
@@ -268,6 +305,55 @@ const RavasonBusinessProfile = {
 
         if (form) {
 
+            const countrySelect =
+                document.getElementById(
+                    "business-country"
+                );
+
+            const citySelect =
+                document.getElementById(
+                    "business-city"
+                );
+
+
+            if (
+                countrySelect &&
+                citySelect
+            ) {
+
+                countrySelect.addEventListener(
+                    "change",
+                    () => {
+
+                        const cities =
+                            window.RavasonCities[
+                                countrySelect.value
+                            ] || [];
+
+                        citySelect.innerHTML = `
+
+                            <option value="">
+                                Select city
+                            </option>
+
+                            ${
+                                cities
+                                    .map(city => `
+                                        <option value="${city}">
+                                            ${city}
+                                        </option>
+                                    `)
+                                    .join("")
+                            }
+
+                        `;
+
+                    }
+                );
+
+            }
+
+
             form.addEventListener(
                 "submit",
                 (event) => {
@@ -283,8 +369,11 @@ const RavasonBusinessProfile = {
                     const industry =
                         formData.get("industry");
 
-                    const location =
-                        formData.get("location").trim();
+                    const country =
+                        formData.get("country");
+
+                    const city =
+                        formData.get("city").trim();
 
                     const businessSize =
                         formData.get("businessSize");
@@ -312,10 +401,21 @@ const RavasonBusinessProfile = {
                     }
 
 
-                    if (!location) {
+                    if (!country) {
 
                         alert(
-                            "Please enter your business location."
+                            "Please select your country."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!city) {
+
+                        alert(
+                            "Please enter your city."
                         );
 
                         return;
@@ -340,7 +440,9 @@ const RavasonBusinessProfile = {
 
                         industry: industry,
 
-                        location: location,
+                        country: country,
+
+                        city: city,
 
                         businessSize: businessSize,
 
