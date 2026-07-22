@@ -148,3 +148,59 @@
         padding: 20px;
     }
 }
+
+
+/* ========================================
+   DASHBOARD RESPONSIVE BEHAVIOR
+======================================== */
+
+@media (max-width: 1000px) {
+
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard-header {
+        align-items: flex-start;
+
+        gap: var(--space-md);
+    }
+
+    .dashboard-date {
+        font-size: 12px;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+    .insights-card {
+        flex-direction: column;
+
+        gap: var(--space-md);
+
+        padding: var(--space-lg);
+    }
+
+}

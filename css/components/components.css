@@ -101,3 +101,213 @@
 .coming-soon p {
     color: var(--ravason-muted-text);
 }
+
+
+/* ========================================
+   BUSINESS COMMAND CENTER
+======================================== */
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--space-xl);
+}
+
+.dashboard-header h1 {
+    color: var(--ravason-midnight-blue);
+    margin-bottom: var(--space-sm);
+}
+
+.dashboard-header p {
+    color: var(--ravason-muted-text);
+}
+
+.dashboard-date {
+    color: var(--ravason-gold);
+    font-weight: bold;
+}
+
+
+/* ========================================
+   OVERVIEW CARDS
+======================================== */
+
+.overview-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: var(--space-md);
+
+    margin-bottom: var(--space-xl);
+}
+
+.dashboard-card {
+    display: flex;
+    align-items: center;
+
+    gap: var(--space-md);
+
+    padding: var(--space-lg);
+
+    background: var(--ravason-white);
+
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-sm);
+
+    border-top: 3px solid var(--ravason-gold);
+
+    transition: transform var(--transition-fast),
+                box-shadow var(--transition-fast);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow-md);
+}
+
+.card-icon {
+    font-size: 28px;
+}
+
+.card-label {
+    display: block;
+
+    color: var(--ravason-muted-text);
+
+    font-size: 13px;
+
+    margin-bottom: 6px;
+}
+
+.dashboard-card strong {
+    display: block;
+
+    color: var(--ravason-midnight-blue);
+
+    font-size: 20px;
+}
+
+
+/* ========================================
+   DASHBOARD SECTIONS
+======================================== */
+
+.dashboard-section {
+    margin-bottom: var(--space-xl);
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--space-md);
+}
+
+.section-heading h2 {
+    color: var(--ravason-midnight-blue);
+
+    font-size: 20px;
+}
+
+.section-heading span {
+    color: var(--ravason-muted-text);
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   QUICK ACTIONS
+======================================== */
+
+.quick-actions {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: var(--space-md);
+}
+
+.action-card {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--space-sm);
+
+    min-height: 90px;
+
+    border: 1px solid var(--ravason-border);
+
+    border-radius: var(--radius-md);
+
+    background: var(--ravason-white);
+
+    color: var(--ravason-midnight-blue);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: background var(--transition-fast),
+                border-color var(--transition-fast),
+                transform var(--transition-fast);
+}
+
+.action-card:hover {
+    background: var(--ravason-midnight-blue);
+
+    border-color: var(--ravason-gold);
+
+    color: var(--ravason-white);
+
+    transform: translateY(-3px);
+}
+
+
+/* ========================================
+   AI INSIGHTS
+======================================== */
+
+.insights-card {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: var(--space-lg);
+
+    padding: var(--space-xl);
+
+    background: var(--ravason-midnight-blue);
+
+    color: var(--ravason-white);
+
+    border-radius: var(--radius-md);
+
+    border-left: 4px solid var(--ravason-gold);
+
+    box-shadow: var(--shadow-md);
+}
+
+.insights-icon {
+    font-size: 32px;
+}
+
+.insights-card h3 {
+    margin-bottom: var(--space-sm);
+
+    color: var(--ravason-gold);
+}
+
+.insights-card p {
+    color: rgba(255, 255, 255, 0.8);
+
+    line-height: 1.6;
+}
