@@ -1,0 +1,150 @@
+/* ========================================
+   RAVASON RESPONSIVE APPLICATION LAYOUT
+======================================== */
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .global-search {
+        width: 160px;
+    }
+
+    .brand-text h2 {
+        font-size: 16px;
+    }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+
+    /* Header */
+    .app-header {
+        height: 64px;
+        padding: 0 12px;
+    }
+
+    .logo-section {
+        gap: 8px;
+    }
+
+    .ravason-logo {
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand-text h2 {
+        font-size: 14px;
+    }
+
+    .brand-text small {
+        display: none;
+    }
+
+    /* Hide desktop search */
+    .global-search {
+        display: none;
+    }
+
+    .header-actions {
+        gap: 8px;
+    }
+
+    /* Mobile menu button */
+    .mobile-menu-btn {
+        display: block;
+
+        border: none;
+        background: transparent;
+
+        color: var(--ravason-white);
+
+        font-size: 24px;
+
+        cursor: pointer;
+    }
+
+    /* Main layout */
+    .main-layout {
+        display: block;
+        position: relative;
+    }
+
+    /* Sidebar becomes off-canvas */
+    .sidebar {
+        position: fixed;
+
+        top: 64px;
+        left: -280px;
+
+        width: 260px;
+        height: calc(100vh - 64px);
+
+        z-index: 1000;
+
+        transition: left 0.3s ease;
+
+        overflow-y: auto;
+    }
+
+    /* Sidebar open state */
+    .sidebar.mobile-open {
+        left: 0;
+    }
+
+    /* Workspace */
+    .dashboard {
+        width: 100%;
+        padding: 20px 16px;
+    }
+
+    .dashboard h1 {
+        font-size: 24px;
+    }
+
+    /* Header profile */
+    .profile {
+        font-size: 12px;
+    }
+}
+
+/* ========================================
+   SMALL MOBILE DEVICES
+======================================== */
+
+@media (max-width: 420px) {
+
+    .brand-text h2 {
+        font-size: 12px;
+    }
+
+    .notification-btn {
+        font-size: 18px;
+    }
+
+    .profile {
+        display: none;
+    }
+
+    .dashboard h1 {
+        font-size: 21px;
+    }
+
+    .coming-soon {
+        padding: 20px;
+    }
+}
