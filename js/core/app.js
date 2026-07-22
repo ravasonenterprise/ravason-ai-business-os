@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navigationItems =
         document.querySelectorAll(".nav-item");
 
+
     /*
      * Mobile menu
      */
@@ -49,6 +50,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             item.classList.add("active");
 
+
+            /*
+             * Close mobile sidebar
+             */
+
+            if (sidebar) {
+
+                sidebar.classList.remove("mobile-open");
+
+            }
+
         });
 
     });
@@ -69,5 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
     );
+
+
+    /*
+     * Initialize workspace
+     */
+
+    if (window.RavasonWorkspace) {
+
+        window.RavasonWorkspace.init();
+
+    }
 
 });
