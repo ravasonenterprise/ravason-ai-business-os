@@ -2,6 +2,16 @@ const RavasonBusinessProfile = {
 
     render() {
 
+        const savedProfile =
+            localStorage.getItem(
+                "ravason_business_profile"
+            );
+
+        const profile =
+            savedProfile
+                ? JSON.parse(savedProfile)
+                : {};
+
         return `
 
             <section class="module-workspace">
@@ -61,6 +71,7 @@ const RavasonBusinessProfile = {
                                     id="business-name"
                                     name="businessName"
                                     placeholder="Enter business name"
+                                    value="${profile.businessName || ""}"
                                     required>
 
                             </div>
@@ -81,31 +92,31 @@ const RavasonBusinessProfile = {
                                         Select industry
                                     </option>
 
-                                    <option value="retail">
+                                    <option value="retail" ${profile.industry === "retail" ? "selected" : ""}>
                                         Retail
                                     </option>
 
-                                    <option value="technology">
+                                    <option value="technology" ${profile.industry === "technology" ? "selected" : ""}>
                                         Technology
                                     </option>
 
-                                    <option value="finance">
+                                    <option value="finance" ${profile.industry === "finance" ? "selected" : ""}>
                                         Finance
                                     </option>
 
-                                    <option value="education">
+                                    <option value="education" ${profile.industry === "education" ? "selected" : ""}>
                                         Education
                                     </option>
 
-                                    <option value="hospitality">
+                                    <option value="hospitality" ${profile.industry === "hospitality" ? "selected" : ""}>
                                         Hospitality
                                     </option>
 
-                                    <option value="agriculture">
+                                    <option value="agriculture" ${profile.industry === "agriculture" ? "selected" : ""}>
                                         Agriculture
                                     </option>
 
-                                    <option value="other">
+                                    <option value="other" ${profile.industry === "other" ? "selected" : ""}>
                                         Other
                                     </option>
 
@@ -124,7 +135,8 @@ const RavasonBusinessProfile = {
                                     type="text"
                                     id="business-location"
                                     name="location"
-                                    placeholder="City / Country">
+                                    placeholder="City / Country"
+                                    value="${profile.location || ""}">
 
                             </div>
 
@@ -143,19 +155,19 @@ const RavasonBusinessProfile = {
                                         Select size
                                     </option>
 
-                                    <option value="solo">
+                                    <option value="solo" ${profile.businessSize === "solo" ? "selected" : ""}>
                                         Solo / Individual
                                     </option>
 
-                                    <option value="small">
+                                    <option value="small" ${profile.businessSize === "small" ? "selected" : ""}>
                                         Small Business
                                     </option>
 
-                                    <option value="medium">
+                                    <option value="medium" ${profile.businessSize === "medium" ? "selected" : ""}>
                                         Medium Business
                                     </option>
 
-                                    <option value="large">
+                                    <option value="large" ${profile.businessSize === "large" ? "selected" : ""}>
                                         Large Enterprise
                                     </option>
 
@@ -184,8 +196,7 @@ const RavasonBusinessProfile = {
                                 id="business-description"
                                 name="description"
                                 rows="6"
-                                placeholder="Describe your business...">
-                            </textarea>
+                                placeholder="Describe your business...">${profile.description || ""}</textarea>
 
                         </div>
 
