@@ -62,17 +62,28 @@
     list-style: none;
 }
 
-.sidebar li {
+.sidebar .nav-item {
+    width: 100%;
+    border: none;
+    background: transparent;
     color: var(--ravason-white);
     padding: 14px 16px;
-    margin-bottom: 6px;
     border-radius: var(--radius-md);
     cursor: pointer;
+    text-align: left;
+    font: inherit;
+    transition: all 0.2s ease;
 }
 
-.sidebar li:hover {
-    background: rgba(212, 175, 55, 0.18);
+.sidebar .nav-item:hover {
+    background: rgba(212, 175, 55, 0.12);
     color: var(--ravason-gold);
+}
+
+.sidebar .nav-item.active {
+    background: var(--ravason-gold);
+    color: var(--ravason-midnight);
+    font-weight: 600;
 }
 
 .dashboard h1 {
