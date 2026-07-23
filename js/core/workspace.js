@@ -99,6 +99,19 @@ const RavasonWorkspace = {
             return;
 
         }
+        if (
+    route === "ai-assistant" &&
+    window.RavasonAIBusinessAssistant
+) {
+
+    this.workspace.innerHTML =
+        window.RavasonAIBusinessAssistant.render();
+
+    window.RavasonAIBusinessAssistant.init();
+
+    return;
+
+}
 
         const view =
             this.views[route];

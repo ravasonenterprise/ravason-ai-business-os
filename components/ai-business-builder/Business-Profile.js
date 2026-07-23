@@ -80,32 +80,31 @@ const RavasonBusinessProfile = {
                             <div class="form-group">
 
                                 <label for="business-industry">
-                                    Industry
-                                </label>
+    Industry
+</label>
 
-                                <select
-                                    id="business-industry"
-                                    name="industry"
-                                    required>
+<select
+    id="business-industry"
+    name="industry"
+    required>
 
-                                    <option value="">
-                                        Select industry
-                                    </option>
+    <option value="">
+        Select industry
+    </option>
 
-                                    ${
-                                        window.RavasonIndustryDatabase
-                                            .industries
-                                            .map(industry => `
-                                                <option
-                                                    value="${industry}"
-                                                    ${profile.industry === industry ? "selected" : ""}>
-                                                    ${industry}
-                                                </option>
-                                            `)
-                                            .join("")
-                                    }
+    ${
+        window.RavasonIndustryDatabase
+            .map(industry => `
+                <option
+                    value="${industry}"
+                    ${profile.industry === industry ? "selected" : ""}>
+                    ${industry}
+                </option>
+            `)
+            .join("")
+    }
 
-                                </select>
+</select>
 
                             </div>
 
@@ -126,8 +125,8 @@ const RavasonBusinessProfile = {
                                     </option>
 
                                     ${
-                                        window.RavasonIndustryDatabase
-                                            .countries
+                                        window.RavasonBusinessOptions
+                                             .countries
                                             .map(country => `
                                                 <option
                                                     value="${country}"

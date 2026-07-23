@@ -37,30 +37,28 @@ const RavasonAIBusinessBuilder = {
 
                     <article class="builder-card">
 
-                        <div class="builder-card-icon">
-                            🏢
-                        </div>
+    <div class="builder-card-icon">
+        💬
+    </div>
 
-                        <h2>
-                            Business Profile
-                        </h2>
+    <h2>
+        AI Business Assistant
+    </h2>
 
-                        <p>
-                            Define your business identity, industry,
-                            location, and business model.
-                        </p>
+    <p>
+        Ask Ravason AI questions and receive intelligent
+        assistance based on your business profile.
+    </p>
 
-                        <button
-                            class="secondary-action"
-                            data-builder-action="business-profile">
+    <button
+        class="secondary-action"
+        data-builder-action="ai-assistant">
 
-                            Set Up Profile
+        Open AI Assistant
 
-                        </button>
+    </button>
 
-                    </article>
-
-
+</article>
                     <article class="builder-card">
 
                         <div class="builder-card-icon">
@@ -214,7 +212,16 @@ document.addEventListener("click", (event) => {
         );
 
     }
+if (
+    actionName === "ai-assistant" &&
+    window.RavasonRouter
+) {
 
+    window.RavasonRouter.navigate(
+        "ai-assistant"
+    );
+
+}
 });
 
 
