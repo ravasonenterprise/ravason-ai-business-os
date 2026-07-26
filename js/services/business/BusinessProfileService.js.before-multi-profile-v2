@@ -1,0 +1,45 @@
+const RavasonBusinessProfileService = {
+
+    STORAGE_KEY:
+        "ravason_business_profile",
+
+
+    getProfile() {
+
+        return RavasonStorageService.get(
+
+            this.STORAGE_KEY
+
+        ) || {};
+
+    },
+
+
+    saveProfile(profile) {
+
+        return RavasonStorageService.set(
+
+            this.STORAGE_KEY,
+
+            profile
+
+        );
+
+    },
+
+
+    clearProfile() {
+
+        RavasonStorageService.remove(
+
+            this.STORAGE_KEY
+
+        );
+
+    }
+
+};
+
+
+window.RavasonBusinessProfileService =
+    RavasonBusinessProfileService;

@@ -10,7 +10,7 @@
 
     <!-- Ravason Main Styles -->
     <link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/themes/ravason-themes.css">
+<link rel="stylesheet" href="css/themes/ravason-theme.css">
    
 </head>
 
@@ -295,8 +295,6 @@
     <script src="js/services/entitlements/EntitlementService.js"></script>
 
     <script src="js/services/business/BusinessProfileService.js"></script>
-    <script src="js/services/ai/AIConsentService.js"></script>
-    <script src="js/services/ai/AIStatusService.js"></script>
     <script src="js/services/ai/AIService.js"></script>
     <script src="js/services/ai/AIConversationService.js"></script>
 
@@ -307,7 +305,6 @@
     <script src="components/ai-business-assistant/AI-Business-Assistant.js"></script>
 
     <script src="js/core/workspace.js"></script>
-    <script src="js/core/diagnostics.js"></script>
     <script src="js/core/app.js"></script>
 
 </body>

@@ -1,21 +1,9 @@
 const RavasonBusinessProfile = {
 
-    createMode: false,
-
     render() {
 
         const profile =
-            RavasonBusinessProfile.createMode
-                ? {}
-                : RavasonBusinessProfileService
-                    .getProfiles()
-                    .find(
-                        item =>
-                            item.id ===
-                            RavasonBusinessProfile.editingProfileId
-                    ) ||
-                    RavasonBusinessProfileService
-                        .getActiveProfile();
+            RavasonBusinessProfileService.getProfile();
 
         return `
 
@@ -243,15 +231,6 @@ const RavasonBusinessProfile = {
 
                         </button>
 
-                        <button
-                            type="button"
-                            class="secondary-action"
-                            id="create-new-business-profile">
-
-                            Create New Business Profile
-
-                        </button>
-
                     </div>
 
 
@@ -287,33 +266,6 @@ const RavasonBusinessProfile = {
             document.getElementById(
                 "business-profile-message"
             );
-
-
-        const createProfileButton =
-            document.getElementById(
-                "create-new-business-profile"
-            );
-
-
-        if (
-            createProfileButton
-        ) {
-
-            createProfileButton.addEventListener(
-                "click",
-                () => {
-
-                    RavasonBusinessProfile.createMode =
-                        true;
-
-                    window.RavasonRouter.navigate(
-                        "business-profile"
-                    );
-
-                }
-            );
-
-        }
 
 
         if (backButton) {
@@ -540,12 +492,6 @@ const RavasonBusinessProfile = {
 
                     const businessProfile = {
 
-                        id:
-                            RavasonBusinessProfile.createMode
-                                ? undefined
-                                : RavasonBusinessProfile
-                                    .editingProfileId,
-
                         businessName: businessName,
 
                         industry: industry,
@@ -563,15 +509,11 @@ const RavasonBusinessProfile = {
 
 
                     const profileSaved =
-                        RavasonBusinessProfile.createMode
+                        RavasonBusinessProfileService.saveProfile(
 
-                            ? RavasonBusinessProfileService.createProfile(
-                                businessProfile
-                            )
+                            businessProfile
 
-                            : RavasonBusinessProfileService.saveProfile(
-                                businessProfile
-                            );
+                        );
 
                     if (!profileSaved) {
 
@@ -592,15 +534,6 @@ const RavasonBusinessProfile = {
                             "Business profile saved successfully.";
 
                     }
-
-
-                    RavasonBusinessProfile.createMode =
-                        false;
-
-
-                    RavasonBusinessProfile.editingProfileId =
-                        null;
-
 
                     console.log(
                         "Business profile saved:",

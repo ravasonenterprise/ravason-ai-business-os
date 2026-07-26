@@ -227,10 +227,11 @@ if (
 
 RavasonAIBusinessBuilder.loadProfile = function () {
 
-    const profileData =
-        localStorage.getItem(
-            "ravason_business_profile"
-        );
+    const profiles =
+        RavasonBusinessProfileService.getProfiles();
+
+    const activeProfile =
+        RavasonBusinessProfileService.getActiveProfile();
 
     const summary =
         document.getElementById(
@@ -241,12 +242,47 @@ RavasonAIBusinessBuilder.loadProfile = function () {
         return;
     }
 
-    if (!profileData) {
+
+    if (!profiles.length) {
+
+        summary.innerHTML = `
+
+            <div class="profile-summary-header">
+
+                <div>
+
+                    <span class="module-eyebrow">
+                        BUSINESS PROFILE
+                    </span>
+
+                    <h2>
+                        No Business Profiles Yet
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p>
+                Create your first business profile to begin.
+            </p>
+
+
+            <button
+                class="primary-action"
+                data-builder-action="business-profile">
+
+                Create Business Profile
+
+            </button>
+
+        `;
+
         return;
+
     }
 
-    const profile =
-        JSON.parse(profileData);
 
     summary.innerHTML = `
 
@@ -255,99 +291,320 @@ RavasonAIBusinessBuilder.loadProfile = function () {
             <div>
 
                 <span class="module-eyebrow">
-                    BUSINESS PROFILE
+                    BUSINESS PROFILES
                 </span>
 
                 <h2>
-                    ${profile.businessName || "Unnamed Business"}
+                    Your Businesses
                 </h2>
 
             </div>
 
             <span class="profile-complete-badge">
-                Profile Created
+                ${profiles.length} Profile${profiles.length === 1 ? "" : "s"}
             </span>
 
         </div>
 
 
-        <div class="profile-summary-grid">
+        <div class="business-profiles-list">
 
-            <div>
+            ${profiles.map(profile => `
 
-                <span>
-                    Industry
-                </span>
+                <article
+                    class="business-profile-card
+                    ${profile.id === activeProfile.id
+                        ? "active-profile"
+                        : ""}">
 
-                <strong>
-                    ${profile.industry || "Not specified"}
-                </strong>
+                    <div
+                        class="profile-summary-header">
 
-            </div>
+                        <div>
 
+                            <span class="module-eyebrow">
+                                BUSINESS PROFILE
+                            </span>
 
-            <div>
+                            <h2>
+                                ${profile.businessName || "Unnamed Business"}
+                            </h2>
 
-                <span>
-                    Country
-                </span>
+                        </div>
 
-                <strong>
-                    ${profile.country || "Not specified"}
-                </strong>
+                        ${
+                            profile.id === activeProfile.id
+                                ? `
+                                    <span
+                                        class="profile-complete-badge">
+                                        Active
+                                    </span>
+                                  `
+                                : ""
+                        }
 
-            </div>
-
-
-            <div>
-
-                <span>
-                    City
-                </span>
-
-                <strong>
-                    ${profile.city || "Not specified"}
-                </strong>
-
-            </div>
+                    </div>
 
 
-            <div>
+                    <div
+                        class="profile-summary-grid">
 
-                <span>
-                    Business Size
-                </span>
+                        <div>
 
-                <strong>
-                    ${profile.businessSize || "Not specified"}
-                </strong>
+                            <span>
+                                Industry
+                            </span>
 
-            </div>
+                            <strong>
+                                ${profile.industry || "Not specified"}
+                            </strong>
 
-        </div>
+                        </div>
 
 
-        <div class="profile-description">
+                        <div>
 
-            <span>
-                Description
-            </span>
+                            <span>
+                                Country
+                            </span>
 
-            <p>
-                ${profile.description || "No description provided."}
-            </p>
+                            <strong>
+                                ${profile.country || "Not specified"}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                City
+                            </span>
+
+                            <strong>
+                                ${profile.city || "Not specified"}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Business Size
+                            </span>
+
+                            <strong>
+                                ${profile.businessSize || "Not specified"}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="profile-description">
+
+                        <span>
+                            Description
+                        </span>
+
+                        <p>
+                            ${profile.description || "No description provided."}
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="form-actions">
+
+                        ${
+                            profile.id !== activeProfile.id
+                                ? `
+                                    <button
+                                        class="primary-action"
+                                        data-profile-action="activate"
+                                        data-profile-id="${profile.id}">
+
+                                        Use This Profile
+
+                                    </button>
+                                  `
+                                : ""
+                        }
+
+
+                        <button
+                            class="secondary-action"
+                            data-profile-action="edit"
+                            data-profile-id="${profile.id}">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="secondary-action"
+                            data-profile-action="delete"
+                            data-profile-id="${profile.id}">
+
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+            `).join("")}
 
         </div>
 
 
         <button
-            class="secondary-action"
-            data-builder-action="business-profile">
+            class="primary-action"
+            data-builder-action="create-business-profile">
 
-            Edit Business Profile
+            Create New Business Profile
 
         </button>
 
     `;
+
+
+    summary
+        .querySelectorAll(
+            "[data-profile-action]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const action =
+                            button.dataset.profileAction;
+
+                        const profileId =
+                            button.dataset.profileId;
+
+
+                        if (
+                            action ===
+                            "activate"
+                        ) {
+
+                            RavasonBusinessProfileService
+                                .setActiveProfile(
+                                    profileId
+                                );
+
+                            RavasonAIBusinessBuilder
+                                .loadProfile();
+
+                            return;
+
+                        }
+
+
+                        if (
+                            action ===
+                            "edit"
+                        ) {
+
+                            RavasonBusinessProfile
+                                .createMode =
+                                false;
+
+                            RavasonBusinessProfile
+                                .editingProfileId =
+                                profileId;
+
+                            window.RavasonRouter
+                                .navigate(
+                                    "business-profile"
+                                );
+
+                            return;
+
+                        }
+
+
+                        if (
+                            action ===
+                            "delete"
+                        ) {
+
+                            const confirmed =
+                                window.confirm(
+                                    "Delete this business profile?"
+                                );
+
+                            if (
+                                !confirmed
+                            ) {
+
+                                return;
+
+                            }
+
+                            RavasonBusinessProfileService
+                                .deleteProfile(
+                                    profileId
+                                );
+
+                            RavasonAIBusinessBuilder
+                                .loadProfile();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    const createButton =
+        summary.querySelector(
+            '[data-profile-action="create"]'
+        );
+
+
+    const createBusinessButton =
+        summary.querySelector(
+            '[data-builder-action="create-business-profile"]'
+        );
+
+
+    if (
+        createBusinessButton
+    ) {
+
+        createBusinessButton.addEventListener(
+            "click",
+            () => {
+
+                RavasonBusinessProfile
+                    .createMode =
+                    true;
+
+                RavasonBusinessProfile
+                    .editingProfileId =
+                    null;
+
+                window.RavasonRouter
+                    .navigate(
+                        "business-profile"
+                    );
+
+            }
+        );
+
+    }
 
 };

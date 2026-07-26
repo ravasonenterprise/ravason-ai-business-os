@@ -301,27 +301,8 @@ const RavasonAIBusinessAssistant = {
             chat
         ) {
 
-            const activeProfile =
-                RavasonBusinessProfileService
-                    .getActiveProfile();
-
-            const profileId =
-                activeProfile.id;
-
-            if (!profileId) {
-
-                console.error(
-                    "AI Assistant cannot start without an active profile."
-                );
-
-                return;
-
-            }
-
             const messages =
-                RavasonAIConversationService.getMessages(
-                    profileId
-                );
+                RavasonAIConversationService.getMessages();
 
 
             if (
@@ -329,8 +310,6 @@ const RavasonAIBusinessAssistant = {
             ) {
 
                 RavasonAIConversationService.addMessage(
-
-                    profileId,
 
                     "assistant",
 
@@ -343,9 +322,7 @@ const RavasonAIBusinessAssistant = {
 
 
             const conversation =
-                RavasonAIConversationService.getMessages(
-                    profileId
-                );
+                RavasonAIConversationService.getMessages();
 
 
             conversation.forEach(
@@ -423,8 +400,6 @@ const RavasonAIBusinessAssistant = {
                     const userMessageSaved =
                         RavasonAIConversationService.addMessage(
 
-                            profileId,
-
                             "user",
 
                             question
@@ -486,8 +461,6 @@ const RavasonAIBusinessAssistant = {
 
                         const assistantMessageSaved =
                             RavasonAIConversationService.addMessage(
-
-                                profileId,
 
                                 "assistant",
 

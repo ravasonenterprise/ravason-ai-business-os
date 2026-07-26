@@ -10,7 +10,7 @@
 
     <!-- Ravason Main Styles -->
     <link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/themes/ravason-themes.css">
+<link rel="stylesheet" href="css/themes/ravason-theme.css">
    
 </head>
 
@@ -307,7 +307,6 @@
     <script src="components/ai-business-assistant/AI-Business-Assistant.js"></script>
 
     <script src="js/core/workspace.js"></script>
-    <script src="js/core/diagnostics.js"></script>
     <script src="js/core/app.js"></script>
 
 </body>

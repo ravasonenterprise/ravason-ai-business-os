@@ -7,15 +7,7 @@ const RavasonBusinessProfile = {
         const profile =
             RavasonBusinessProfile.createMode
                 ? {}
-                : RavasonBusinessProfileService
-                    .getProfiles()
-                    .find(
-                        item =>
-                            item.id ===
-                            RavasonBusinessProfile.editingProfileId
-                    ) ||
-                    RavasonBusinessProfileService
-                        .getActiveProfile();
+                : RavasonBusinessProfileService.getProfile();
 
         return `
 
@@ -540,12 +532,6 @@ const RavasonBusinessProfile = {
 
                     const businessProfile = {
 
-                        id:
-                            RavasonBusinessProfile.createMode
-                                ? undefined
-                                : RavasonBusinessProfile
-                                    .editingProfileId,
-
                         businessName: businessName,
 
                         industry: industry,
@@ -596,10 +582,6 @@ const RavasonBusinessProfile = {
 
                     RavasonBusinessProfile.createMode =
                         false;
-
-
-                    RavasonBusinessProfile.editingProfileId =
-                        null;
 
 
                     console.log(

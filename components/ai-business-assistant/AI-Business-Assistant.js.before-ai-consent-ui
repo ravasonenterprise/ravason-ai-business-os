@@ -3,13 +3,7 @@ const RavasonAIBusinessAssistant = {
     render() {
 
         const profile =
-            RavasonBusinessProfileService
-                .getActiveProfile();
-
-
-        const profileId =
-            profile.id || "";
-
+            RavasonBusinessProfileService.getProfile();
 
         return `
 
@@ -45,31 +39,6 @@ const RavasonAIBusinessAssistant = {
                 </div>
 
 
-                <div
-                    class="ai-consent-panel"
-                    id="ai-consent-panel">
-
-                    <h2>
-                        AI Usage
-                    </h2>
-
-                    <p
-                        id="ai-consent-status">
-                        Checking AI availability...
-                    </p>
-
-                    <button
-                        type="button"
-                        class="secondary-action"
-                        id="ai-consent-toggle">
-
-                        Check AI Status
-
-                    </button>
-
-                </div>
-
-
                 <div class="ai-assistant-context">
 
                     <h2>
@@ -89,14 +58,6 @@ const RavasonAIBusinessAssistant = {
                             "Industry not set"
                         }
                     </p>
-
-                    <small>
-                        Active Profile:
-                        ${
-                            profileId ||
-                            "Not selected"
-                        }
-                    </small>
 
                 </div>
 
@@ -159,125 +120,6 @@ const RavasonAIBusinessAssistant = {
             );
 
 
-        const aiStatus =
-            document.getElementById(
-                "ai-consent-status"
-            );
-
-
-        const aiToggle =
-            document.getElementById(
-                "ai-consent-toggle"
-            );
-
-
-        const updateAIStatus = () => {
-
-            const status =
-                RavasonAIStatusService.getStatus();
-
-
-            if (
-                status.state ===
-                "unavailable"
-            ) {
-
-                aiStatus.textContent =
-                    status.message +
-                    " AI is optional and your " +
-                    "business can continue operating " +
-                    "without AI.";
-
-                aiToggle.textContent =
-                    "AI Not Available";
-
-                aiToggle.disabled =
-                    true;
-
-                return;
-
-            }
-
-
-            if (
-                status.state ===
-                "disabled"
-            ) {
-
-                aiStatus.textContent =
-                    status.message +
-                    " Enable AI only if you choose " +
-                    "to use AI-powered features.";
-
-                aiToggle.textContent =
-                    "Enable AI";
-
-                aiToggle.disabled =
-                    false;
-
-                return;
-
-            }
-
-
-            aiStatus.textContent =
-                status.message;
-
-            aiToggle.textContent =
-                "Disable AI";
-
-            aiToggle.disabled =
-                false;
-
-        };
-
-
-        updateAIStatus();
-
-
-        if (
-            aiToggle
-        ) {
-
-            aiToggle.addEventListener(
-                "click",
-                () => {
-
-                    const status =
-                        RavasonAIStatusService.getStatus();
-
-
-                    if (
-                        !status.available
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    if (
-                        status.enabled
-                    ) {
-
-                        RavasonAIConsentService.disable();
-
-                    } else {
-
-                        RavasonAIConsentService.enable();
-
-                    }
-
-
-                    updateAIStatus();
-
-                }
-
-            );
-
-        }
-
-
         if (backButton) {
 
             backButton.addEventListener(
@@ -301,27 +143,8 @@ const RavasonAIBusinessAssistant = {
             chat
         ) {
 
-            const activeProfile =
-                RavasonBusinessProfileService
-                    .getActiveProfile();
-
-            const profileId =
-                activeProfile.id;
-
-            if (!profileId) {
-
-                console.error(
-                    "AI Assistant cannot start without an active profile."
-                );
-
-                return;
-
-            }
-
             const messages =
-                RavasonAIConversationService.getMessages(
-                    profileId
-                );
+                RavasonAIConversationService.getMessages();
 
 
             if (
@@ -329,8 +152,6 @@ const RavasonAIBusinessAssistant = {
             ) {
 
                 RavasonAIConversationService.addMessage(
-
-                    profileId,
 
                     "assistant",
 
@@ -343,9 +164,7 @@ const RavasonAIBusinessAssistant = {
 
 
             const conversation =
-                RavasonAIConversationService.getMessages(
-                    profileId
-                );
+                RavasonAIConversationService.getMessages();
 
 
             conversation.forEach(
@@ -423,8 +242,6 @@ const RavasonAIBusinessAssistant = {
                     const userMessageSaved =
                         RavasonAIConversationService.addMessage(
 
-                            profileId,
-
                             "user",
 
                             question
@@ -480,34 +297,22 @@ const RavasonAIBusinessAssistant = {
                     );
 
 
-                    if (
-                        aiResult.success === true
-                    ) {
+                    const assistantMessageSaved =
+                        RavasonAIConversationService.addMessage(
 
-                        const assistantMessageSaved =
-                            RavasonAIConversationService.addMessage(
+                            "assistant",
 
-                                profileId,
+                            assistantResponse
 
-                                "assistant",
+                        );
 
-                                assistantResponse
+                    if (!assistantMessageSaved) {
 
-                            );
-
-
-                        if (
-                            !assistantMessageSaved
-                        ) {
-
-                            console.error(
-                                "Assistant message failed to save."
-                            );
-
-                        }
+                        console.error(
+                            "Assistant message failed to save."
+                        );
 
                     }
-
 
 
                     chat.scrollTop =

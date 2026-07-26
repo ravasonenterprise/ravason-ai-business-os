@@ -1,0 +1,33 @@
+const RavasonAIService = {
+
+    ask({
+        question,
+        businessProfile
+    }) {
+
+        return {
+
+            success: true,
+
+            response:
+                "I understand your question. " +
+                "Ravason AI will analyze your business " +
+                "context and provide guidance.",
+
+            metadata: {
+
+                aiMode: "placeholder",
+
+                businessProfile
+
+            }
+
+        };
+
+    }
+
+};
+
+
+window.RavasonAIService =
+    RavasonAIService;
