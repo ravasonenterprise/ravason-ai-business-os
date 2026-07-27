@@ -1,5 +1,102 @@
 const RavasonModuleLoaderService = {
 
+    RUNTIME_DEFINITIONS: {},
+
+
+    registerRuntimeDefinition(
+        moduleId,
+        definition
+    ) {
+
+        if (
+            !moduleId
+        ) {
+
+            throw new Error(
+
+                "Module ID is required."
+
+            );
+
+        }
+
+
+        if (
+            !definition ||
+            typeof definition !==
+                "object"
+        ) {
+
+            throw new Error(
+
+                "Module runtime definition is required."
+
+            );
+
+        }
+
+
+        this.RUNTIME_DEFINITIONS[
+            moduleId
+        ] =
+            definition;
+
+
+        return true;
+
+    },
+
+
+    getRuntimeDefinition(
+        moduleId
+    ) {
+
+        if (
+            !moduleId
+        ) {
+
+            return null;
+
+        }
+
+
+        return this.RUNTIME_DEFINITIONS[
+            moduleId
+        ] ||
+        null;
+
+    },
+
+
+    requireRuntimeDefinition(
+        moduleId
+    ) {
+
+        const definition =
+            this.getRuntimeDefinition(
+                moduleId
+            );
+
+
+        if (
+            !definition
+        ) {
+
+            throw new Error(
+
+                "No runtime definition registered for module: " +
+                moduleId
+
+            );
+
+        }
+
+
+        return definition;
+
+    },
+
+
     loadModule(
         productId,
         moduleId
@@ -19,7 +116,7 @@ const RavasonModuleLoaderService = {
 
 
         RavasonModuleRuntimeService
-            .requireRuntimeAccess(
+            .requireModuleRuntime(
 
                 productId,
 
@@ -31,7 +128,9 @@ const RavasonModuleLoaderService = {
         const module =
             RavasonModuleRegistry
                 .getModule(
+
                     moduleId
+
                 );
 
 
@@ -51,9 +150,7 @@ const RavasonModuleLoaderService = {
 
         if (
             module.status !==
-                RavasonModuleRegistry
-                    .STATUSES
-                    .ACTIVE
+                "active"
         ) {
 
             throw new Error(
@@ -66,23 +163,47 @@ const RavasonModuleLoaderService = {
         }
 
 
+        const definition =
+            this.requireRuntimeDefinition(
+
+                moduleId
+
+            );
+
+
+        let loadedModule;
+
+
         if (
-            typeof module.loader !==
+            typeof definition.load ===
                 "function"
+        ) {
+
+            loadedModule =
+                definition.load();
+
+        }
+
+        else {
+
+            loadedModule =
+                definition;
+
+        }
+
+
+        if (
+            !loadedModule
         ) {
 
             throw new Error(
 
-                "Module does not provide a loader: " +
+                "Module failed to load: " +
                 moduleId
 
             );
 
         }
-
-
-        const loadedModule =
-            module.loader();
 
 
         return {
@@ -110,32 +231,13 @@ const RavasonModuleLoaderService = {
         moduleId
     ) {
 
-        const loaded =
-            this.loadModule(
+        return this.loadModule(
 
-                productId,
+            productId,
 
-                moduleId
+            moduleId
 
-            );
-
-
-        if (
-            !loaded ||
-            !loaded.module
-        ) {
-
-            throw new Error(
-
-                "Module failed to load: " +
-                moduleId
-
-            );
-
-        }
-
-
-        return loaded;
+        );
 
     },
 
@@ -147,20 +249,15 @@ const RavasonModuleLoaderService = {
 
         try {
 
-            const loaded =
+            return Boolean(
+
                 this.loadModule(
 
                     productId,
 
                     moduleId
 
-                );
-
-
-            return Boolean(
-
-                loaded &&
-                loaded.module
+                )
 
             );
 
