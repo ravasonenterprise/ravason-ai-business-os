@@ -84,6 +84,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /*
+     * Initialize platform modules
+     */
+
+    if (
+        window.RavasonModuleInitializerService
+    ) {
+
+        window.RavasonModuleInitializerService
+            .initialize();
+
+    }
+
+
+    /*
      * Initialize workspace
      */
 
