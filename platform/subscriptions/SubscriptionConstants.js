@@ -1,65 +1,61 @@
-const RavasonSubscriptionConstants = {
+/**
+ * Ravason Enterprise
+ * Platform Subscription Foundation
+ *
+ * SubscriptionConstants.js
+ */
 
-    PLANS: {
+const SubscriptionConstants = Object.freeze({
 
-        FREE:
-            "free",
+    STATUS: Object.freeze({
 
-        STARTER:
-            "starter",
+        TRIAL: "trial",
+        ACTIVE: "active",
+        SUSPENDED: "suspended",
+        EXPIRED: "expired",
+        CANCELLED: "cancelled"
 
-        PRO:
-            "pro",
+    }),
 
-        ENTERPRISE:
-            "enterprise"
+    BILLING_CYCLE: Object.freeze({
 
-    },
+        DAILY: "daily",
+        WEEKLY: "weekly",
+        MONTHLY: "monthly",
+        QUARTERLY: "quarterly",
+        YEARLY: "yearly",
+        LIFETIME: "lifetime"
 
+    }),
 
-    AI_LEVELS: {
+    PLAN_TYPES: Object.freeze({
 
-        ZERO:
-            "zero_ai",
+        FREE: "free",
+        STARTER: "starter",
+        PRO: "pro",
+        ENTERPRISE: "enterprise"
 
-        MEDIUM:
-            "medium_ai",
+    }),
 
-        FULL:
-            "full_ai"
+    AI_TIERS: Object.freeze({
 
-    },
+        ZERO: "zero-ai",
+        MEDIUM: "medium-ai",
+        FULL: "full-ai"
 
+    }),
 
-    STATUS: {
+    ENTITLEMENT_STATUS: Object.freeze({
 
-        ACTIVE:
-            "active",
+        ENABLED: "enabled",
+        DISABLED: "disabled",
+        LIMITED: "limited"
 
-        TRIAL:
-            "trial",
+    }),
 
-        EXPIRED:
-            "expired",
+    DEFAULT_TRIAL_DAYS: 14
 
-        CANCELLED:
-            "cancelled"
+});
 
-    },
-
-
-    BILLING_INTERVALS: {
-
-        MONTHLY:
-            "monthly",
-
-        YEARLY:
-            "yearly"
-
-    }
-
-};
-
-
-window.RavasonSubscriptionConstants =
-    RavasonSubscriptionConstants;
+module.exports =
+    SubscriptionConstants;
