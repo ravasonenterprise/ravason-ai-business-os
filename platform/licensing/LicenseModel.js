@@ -1,77 +1,89 @@
-const RavasonLicenseModel = {
+/**
+ * Ravason Enterprise
+ * Platform Licensing Foundation
+ *
+ * LicenseModel.js
+ */
 
-    create(data = {}) {
+const LicenseConstants =
+    require("./LicenseConstants");
 
-        return {
+class LicenseModel {
 
-            id:
-                data.id || crypto.randomUUID(),
+    constructor(data = {}) {
 
-            tenantId:
-                data.tenantId || "",
+        this.id =
+            data.id || null;
 
-            subscriptionId:
-                data.subscriptionId || "",
+        this.tenantId =
+            data.tenantId || null;
 
-            licenseKey:
-                data.licenseKey || "",
+        this.productId =
+            data.productId || null;
 
-            type:
-                data.type ||
-                RavasonLicenseConstants
-                    .LICENSE_TYPES
-                    .SUBSCRIPTION,
+        this.subscriptionId =
+            data.subscriptionId || null;
 
-            status:
-                data.status ||
-                RavasonLicenseConstants
-                    .LICENSE_STATUS
-                    .PENDING,
+        this.licenseType =
+            data.licenseType ||
+            LicenseConstants.LICENSE_TYPES.SUBSCRIPTION;
 
-            activated:
-                data.activated || false,
+        this.status =
+            data.status ||
+            LicenseConstants.STATUS.PENDING;
 
-            deviceIds:
-                data.deviceIds || [],
+        this.maxDevices =
+            Number(
+                data.maxDevices ||
+                LicenseConstants.DEFAULT_MAX_DEVICES
+            );
 
-            issuedAt:
-                data.issuedAt ||
-                new Date().toISOString(),
+        this.activatedDevices =
+            data.activatedDevices || [];
 
-            expiresAt:
-                data.expiresAt || null,
+        this.issuedAt =
+            data.issuedAt ||
+            new Date().toISOString();
 
-            createdAt:
-                new Date().toISOString(),
+        this.expiresAt =
+            data.expiresAt || null;
 
-            updatedAt:
-                new Date().toISOString()
+        this.metadata =
+            data.metadata || {};
 
-        };
+        this.createdAt =
+            data.createdAt ||
+            new Date().toISOString();
 
-    },
-
-
-    validate(license) {
-
-        return (
-
-            license &&
-
-            typeof license.id ===
-                "string" &&
-
-            typeof license.tenantId ===
-                "string" &&
-
-            typeof license.licenseKey ===
-                "string"
-
-        );
+        this.updatedAt =
+            data.updatedAt ||
+            new Date().toISOString();
 
     }
 
-};
+    toJSON() {
 
-window.RavasonLicenseModel =
-    RavasonLicenseModel;
+        return {
+
+            id: this.id,
+            tenantId: this.tenantId,
+            productId: this.productId,
+            subscriptionId: this.subscriptionId,
+            licenseType: this.licenseType,
+            status: this.status,
+            maxDevices: this.maxDevices,
+            activatedDevices: this.activatedDevices,
+            issuedAt: this.issuedAt,
+            expiresAt: this.expiresAt,
+            metadata: this.metadata,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt
+
+        };
+
+    }
+
+}
+
+module.exports =
+    LicenseModel;

@@ -1,76 +1,47 @@
-const RavasonLicenseConstants = {
+/**
+ * Ravason Enterprise
+ * Platform Licensing Foundation
+ *
+ * LicenseConstants.js
+ */
 
-    LICENSE_TYPES: {
+const LicenseConstants = Object.freeze({
 
-        TRIAL:
-            "trial",
+    STATUS: Object.freeze({
 
-        SUBSCRIPTION:
-            "subscription",
+        PENDING: "pending",
+        ACTIVE: "active",
+        SUSPENDED: "suspended",
+        EXPIRED: "expired",
+        REVOKED: "revoked"
 
-        ENTERPRISE:
-            "enterprise",
+    }),
 
-        OFFLINE:
-            "offline"
+    LICENSE_TYPES: Object.freeze({
 
-    },
+        TRIAL: "trial",
+        SUBSCRIPTION: "subscription",
+        LIFETIME: "lifetime"
 
+    }),
 
-    LICENSE_STATUS: {
+    ACTIVATION_TYPES: Object.freeze({
 
-        PENDING:
-            "pending",
+        ONLINE: "online",
+        OFFLINE: "offline"
 
-        ACTIVE:
-            "active",
+    }),
 
-        EXPIRED:
-            "expired",
+    DEVICE_STATUS: Object.freeze({
 
-        SUSPENDED:
-            "suspended",
+        REGISTERED: "registered",
+        REMOVED: "removed"
 
-        REVOKED:
-            "revoked"
+    }),
 
-    },
+    DEFAULT_MAX_DEVICES: 1
 
+});
 
-    ACTIVATION_STATUS: {
-
-        ACTIVATED:
-            "activated",
-
-        NOT_ACTIVATED:
-            "not_activated"
-
-    },
-
-
-    VALIDATION_RESULT: {
-
-        VALID:
-            "valid",
-
-        INVALID:
-            "invalid"
-
-    },
-
-
-    DEFAULTS: {
-
-        TRIAL_DAYS:
-            14,
-
-        MAX_DEVICES:
-            1
-
-    }
-
-};
-
-
-window.RavasonLicenseConstants =
-    RavasonLicenseConstants;
+module.exports =
+    LicenseConstants;
