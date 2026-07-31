@@ -1,93 +1,131 @@
-const RavasonSessionService = {
+/**
+ * Ravason Enterprise
+ * Platform Identity & Access Management
+ *
+ * SessionService.js
+ */
 
-    create(data = {}) {
+const crypto =
+    require("crypto");
 
-        if (
-            !window.RavasonSessionModel
-        ) {
+const IdentityConstants =
+    require("./IdentityConstants");
 
-            throw new Error(
-                "SessionModel is not available."
-            );
+class SessionService {
 
-        }
+    constructor() {
 
-        const session =
-            RavasonSessionModel.create(
-                data
-            );
-
-        return session;
-
-    },
-
-
-    isActive(session) {
-
-        return Boolean(
-
-            session &&
-
-            session.status ===
-                RavasonSessionModel.STATUS.ACTIVE
-
-        );
-
-    },
-
-
-    terminate(session) {
-
-        if (
-            !session
-        ) {
-
-            return null;
-
-        }
-
-        return {
-
-            ...session,
-
-            status:
-                RavasonSessionModel.STATUS.TERMINATED,
-
-            lastActivityAt:
-                new Date()
-                    .toISOString()
-
-        };
-
-    },
-
-
-    expire(session) {
-
-        if (
-            !session
-        ) {
-
-            return null;
-
-        }
-
-        return {
-
-            ...session,
-
-            status:
-                RavasonSessionModel.STATUS.EXPIRED,
-
-            lastActivityAt:
-                new Date()
-                    .toISOString()
-
-        };
+        this.sessions =
+            new Map();
 
     }
 
-};
+    create(user) {
 
-window.RavasonSessionService =
-    RavasonSessionService;
+        if (!user) {
+            throw new Error(
+                "User is required."
+            );
+        }
+
+        const token =
+            crypto.randomUUID();
+
+        const session = {
+
+            token,
+
+            userId:
+                user.id,
+
+            tenantId:
+                user.tenantId,
+
+            status:
+                IdentityConstants
+                    .SESSION_STATUS
+                    .ACTIVE,
+
+            createdAt:
+                new Date()
+                    .toISOString(),
+
+            lastActivityAt:
+                new Date()
+                    .toISOString()
+
+        };
+
+        this.sessions.set(
+            token,
+            session
+        );
+
+        return session;
+
+    }
+
+    get(token) {
+
+        return (
+            this.sessions.get(token) ||
+            null
+        );
+
+    }
+
+    touch(token) {
+
+        const session =
+            this.get(token);
+
+        if (!session) {
+            return null;
+        }
+
+        session.lastActivityAt =
+            new Date()
+                .toISOString();
+
+        return session;
+
+    }
+
+    terminate(token) {
+
+        const session =
+            this.get(token);
+
+        if (!session) {
+            return false;
+        }
+
+        session.status =
+            IdentityConstants
+                .SESSION_STATUS
+                .TERMINATED;
+
+        return true;
+
+    }
+
+    remove(token) {
+
+        return this.sessions.delete(
+            token
+        );
+
+    }
+
+    list() {
+
+        return Array.from(
+            this.sessions.values()
+        );
+
+    }
+
+}
+
+module.exports =
+    new SessionService();

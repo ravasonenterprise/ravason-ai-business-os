@@ -1,57 +1,72 @@
-const RavasonIdentityConstants = {
+/**
+ * Ravason Enterprise
+ * Platform Identity & Access Management
+ *
+ * IdentityConstants.js
+ */
 
-    TYPES: {
+module.exports = Object.freeze({
 
-        PLATFORM: "platform",
+    USER_STATUS: Object.freeze({
 
-        ORGANIZATION: "organization",
+        ACTIVE: "ACTIVE",
 
-        USER: "user",
+        INACTIVE: "INACTIVE",
 
-        DEVICE: "device",
+        LOCKED: "LOCKED",
 
-        SESSION: "session"
+        PENDING: "PENDING",
 
-    },
+        DISABLED: "DISABLED"
 
+    }),
 
+    USER_TYPES: Object.freeze({
 
-    STATUSES: {
+        OWNER: "OWNER",
 
-        ACTIVE: "active",
+        SUPER_ADMIN: "SUPER_ADMIN",
 
-        INACTIVE: "inactive",
+        ADMIN: "ADMIN",
 
-        PENDING: "pending",
+        MANAGER: "MANAGER",
 
-        SUSPENDED: "suspended",
+        STAFF: "STAFF",
 
-        LOCKED: "locked",
+        CUSTOMER: "CUSTOMER"
 
-        DELETED: "deleted"
+    }),
 
-    },
+    SESSION_STATUS: Object.freeze({
 
+        ACTIVE: "ACTIVE",
 
+        EXPIRED: "EXPIRED",
 
-    ROLES: {
+        TERMINATED: "TERMINATED"
 
-        OWNER: "owner",
+    }),
 
-        SUPER_ADMIN: "super-admin",
+    MFA_METHODS: Object.freeze({
 
-        ADMIN: "admin",
+        NONE: "NONE",
 
-        MANAGER: "manager",
+        EMAIL: "EMAIL",
 
-        STAFF: "staff",
+        SMS: "SMS",
 
-        CUSTOMER: "customer"
+        TOTP: "TOTP",
 
-    }
+        AUTHENTICATOR: "AUTHENTICATOR"
 
-};
+    }),
 
+    PASSWORD: Object.freeze({
 
-window.RavasonIdentityConstants =
-    RavasonIdentityConstants;
+        MIN_LENGTH: 12,
+
+        MAX_LENGTH: 128
+
+    })
+
+});

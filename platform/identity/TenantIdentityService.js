@@ -101,5 +101,16 @@ const RavasonTenantIdentityService = {
 
 };
 
-window.RavasonTenantIdentityService =
-    RavasonTenantIdentityService;
+if (typeof window !== "undefined") {
+
+    window.RavasonTenantIdentityService =
+        RavasonTenantIdentityService;
+
+}
+
+if (typeof module !== "undefined") {
+
+    module.exports =
+        RavasonTenantIdentityService;
+
+}

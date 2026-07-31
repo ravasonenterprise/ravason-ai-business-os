@@ -104,5 +104,16 @@ const RavasonIdentityValidator = {
 
 };
 
-window.RavasonIdentityValidator =
-    RavasonIdentityValidator;
+if (typeof window !== "undefined") {
+
+    window.RavasonIdentityValidator =
+        RavasonIdentityValidator;
+
+}
+
+if (typeof module !== "undefined") {
+
+    module.exports =
+        RavasonIdentityValidator;
+
+}

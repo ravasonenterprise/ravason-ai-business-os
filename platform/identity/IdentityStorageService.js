@@ -125,5 +125,16 @@ const RavasonIdentityStorageService = {
 
 };
 
-window.RavasonIdentityStorageService =
-    RavasonIdentityStorageService;
+if (typeof window !== "undefined") {
+
+    window.RavasonIdentityStorageService =
+        RavasonIdentityStorageService;
+
+}
+
+if (typeof module !== "undefined") {
+
+    module.exports =
+        RavasonIdentityStorageService;
+
+}

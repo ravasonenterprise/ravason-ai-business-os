@@ -101,5 +101,16 @@ const RavasonUserIdentityService = {
 
 };
 
-window.RavasonUserIdentityService =
-    RavasonUserIdentityService;
+if (typeof window !== "undefined") {
+
+    window.RavasonUserIdentityService =
+        RavasonUserIdentityService;
+
+}
+
+if (typeof module !== "undefined") {
+
+    module.exports =
+        RavasonUserIdentityService;
+
+}

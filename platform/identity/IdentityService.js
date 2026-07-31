@@ -120,5 +120,16 @@ const RavasonIdentityService = {
 
 };
 
-window.RavasonIdentityService =
-    RavasonIdentityService;
+if (typeof window !== "undefined") {
+
+    window.RavasonIdentityService =
+        RavasonIdentityService;
+
+}
+
+if (typeof module !== "undefined") {
+
+    module.exports =
+        RavasonIdentityService;
+
+}
