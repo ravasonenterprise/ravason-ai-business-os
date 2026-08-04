@@ -1,0 +1,45 @@
+from pathlib import Path
+
+target = Path("platform/notifications/NotificationConstants.js")
+
+content = r'''/**
+ * Ravason Enterprise
+ * Notification Platform
+ * NotificationConstants
+ */
+
+const NotificationConstants = Object.freeze({
+
+    CHANNELS: Object.freeze({
+        IN_APP: "in_app",
+        EMAIL: "email",
+        SMS: "sms",
+        PUSH: "push",
+        WHATSAPP: "whatsapp",
+        WEBHOOK: "webhook"
+    }),
+
+    STATUS: Object.freeze({
+        PENDING: "pending",
+        QUEUED: "queued",
+        SENT: "sent",
+        DELIVERED: "delivered",
+        FAILED: "failed"
+    }),
+
+    PRIORITY: Object.freeze({
+        LOW: "low",
+        NORMAL: "normal",
+        HIGH: "high",
+        CRITICAL: "critical"
+    })
+
+});
+
+module.exports = NotificationConstants;
+'''
+
+target.parent.mkdir(parents=True, exist_ok=True)
+target.write_text(content.strip() + "\n", encoding="utf-8")
+
+print(f"Created {target}")
